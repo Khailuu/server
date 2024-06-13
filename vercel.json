@@ -12,12 +12,12 @@
   ],
   "routes": [
     {
-      "src": "/(.*)",
-      "dest": "/zalo/Server.js"
+      "src": "/zalo/(.*)",
+      "dest": "/zalo/server.js"
     },
     {
-      "src": "/(.*)",
-      "dest": "/momo/Server.js"
+      "src": "/momo/(.*)",
+      "dest": "/momo/server.js"
     }
   ]
 }
