@@ -2,14 +2,22 @@
   "version": 2,
   "builds": [
     {
-      "src": "api/Server.js",
+      "src": "zalo/server.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "momo/server.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/api/Server.js"
+      "dest": "/zalo/Server.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/momo/Server.js"
     }
   ]
 }
