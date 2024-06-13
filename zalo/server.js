@@ -25,10 +25,10 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 app.post('/payment', async (req, res) => {
-  const { amount, orderInfo, maPhong, ngayDen, ngayDi, soLuongKhach, maNguoiDung } = req.body;
+  const { amount, orderInfo, maPhong, ngayDen, ngayDi, soLuongKhach, maNguoiDung, redirectUrl } = req.body;
 
   const embed_data = {
-    redirecturl: 'https://airbnb-capstone.vercel.app/payment-confirm',
+    redirectUrl: redirectUrl,
   };
 
   const items = [];
