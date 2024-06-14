@@ -21,7 +21,7 @@ const corsOptions = {
   optionsSuccessStatus: 204
 };
 const corsOptionsLocal = {
-  origin: 'localhost:3000',
+  origin: 'http://localhost:3000',
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   preflightContinue: false,
   optionsSuccessStatus: 204
