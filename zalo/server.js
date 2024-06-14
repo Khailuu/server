@@ -15,7 +15,7 @@ const config = {
 };
 
 const corsOptions = {
-  origin: 'https://airbnb-capstone.vercel.app' || 'http://localhost:3000',
+  origin: 'https://airbnb-capstone.vercel.app',
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   preflightContinue: false,
   optionsSuccessStatus: 204
