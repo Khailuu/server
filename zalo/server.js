@@ -20,7 +20,14 @@ const corsOptions = {
   preflightContinue: false,
   optionsSuccessStatus: 204
 };
+const corsOptionsLocal = {
+  origin: 'localhost:3000',
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  preflightContinue: false,
+  optionsSuccessStatus: 204
+};
 
+app.use(cors(corsOptionsLocal))
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
@@ -52,6 +59,7 @@ app.post('/payment', async (req, res) => {
 
   try {
     const result = await axios.post(config.endpoint, null, { params: order });
+    console.log(result)
     return res.status(200).json(result.data);
   } catch (error) {
     console.log(error);
