@@ -15,20 +15,20 @@ const config = {
 };
 
 const corsOptions = {
-  origin: 'https://airbnb-capstone.vercel.app',
+  origin: 'https://airbnb-capstone.vercel.app' || 'http://localhost:3000',
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   preflightContinue: false,
   optionsSuccessStatus: 204
 };
-const corsOptionsLocal = {
-  origin: 'http://localhost:3000',
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  preflightContinue: false,
-  optionsSuccessStatus: 204
-};
+// const corsOptionsLocal = {
+//   origin: 'http://localhost:3000',
+//   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+//   preflightContinue: false,
+//   optionsSuccessStatus: 204
+// };
 
 
-app.use(cors(corsOptions || corsOptionsLocal));
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 app.post('/payment', async (req, res) => {
