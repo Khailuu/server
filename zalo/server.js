@@ -27,8 +27,8 @@ const corsOptionsLocal = {
   optionsSuccessStatus: 204
 };
 
-app.use(cors(corsOptionsLocal))
-app.use(cors(corsOptions));
+
+app.use(cors(corsOptions || corsOptionsLocal));
 app.use(bodyParser.json());
 
 app.post('/payment', async (req, res) => {
