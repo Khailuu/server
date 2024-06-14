@@ -32,10 +32,11 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 app.post('/payment', async (req, res) => {
-  const { amount, orderInfo, maPhong, ngayDen, ngayDi, soLuongKhach, maNguoiDung, redirectUrl } = req.body;
+  const { amount, orderInfo, maPhong, ngayDen, ngayDi, soLuongKhach, maNguoiDung, redirectUrl, cancelUrl } = req.body;
 
   const embed_data = {
     redirectUrl: redirectUrl,
+    cancelUrl: cancelUrl
   };
 
   const items = [];
