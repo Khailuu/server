@@ -44,7 +44,9 @@ app.post('/payment', async (req, res) => {
     cancelUrl: cancelUrl,
   };
 
-  const items = [];
+  const items = [{
+    "itename": `${tenPhong}`
+  }];
   const transID = Math.floor(Math.random() * 1000000);
 
   const order = {
