@@ -16,27 +16,32 @@ const config = {
 
 const corsOptions = {
   origin: ['https://airbnb-capstone.vercel.app', 'http://localhost:3000'],
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   preflightContinue: false,
-  optionsSuccessStatus: 204
+  optionsSuccessStatus: 204,
 };
-// const corsOptionsLocal = {
-//   origin: 'http://localhost:3000',
-//   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-//   preflightContinue: false,
-//   optionsSuccessStatus: 204
-// };
-
 
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 app.post('/payment', async (req, res) => {
-  const { amount, orderInfo, maPhong, ngayDen, ngayDi, soLuongKhach, maNguoiDung, redirectUrl, cancelUrl } = req.body;
+  const {
+    amount,
+    orderInfo,
+    maPhong,
+    email,
+    tenPhong,
+    ngayDen,
+    ngayDi,
+    soLuongKhach,
+    maNguoiDung,
+    redirectUrl,
+    cancelUrl,
+  } = req.body;
 
   const embed_data = {
     redirectUrl: redirectUrl,
-    cancelUrl: cancelUrl
+    cancelUrl: cancelUrl,
   };
 
   const items = [];
@@ -45,12 +50,13 @@ app.post('/payment', async (req, res) => {
   const order = {
     app_id: config.app_id,
     app_trans_id: `${moment().format('YYMMDD')}_${transID}`,
-    app_user: 'user123',
+    app_user: `${tenPhong}`,
     app_time: Date.now(),
     item: JSON.stringify(items),
     embed_data: JSON.stringify(embed_data),
     amount,
     callback_url: 'https://your-ngrok-url/callback',
+    email: `${email}`,
     description: orderInfo,
     bank_code: '',
   };
@@ -60,7 +66,7 @@ app.post('/payment', async (req, res) => {
 
   try {
     const result = await axios.post(config.endpoint, null, { params: order });
-    console.log(result)
+    console.log(result);
     return res.status(200).json(result.data);
   } catch (error) {
     console.log(error);
@@ -83,13 +89,16 @@ app.post('/callback', async (req, res) => {
 
       // Gọi API đặt phòng
       try {
-        const bookingResponse = await axios.post('https://your-booking-api-url/booking', {
-          maPhong: dataJson['maPhong'],
-          ngayDen: dataJson['ngayDen'],
-          ngayDi: dataJson['ngayDi'],
-          soLuongKhach: dataJson['soLuongKhach'],
-          maNguoiDung: dataJson['maNguoiDung']
-        });
+        const bookingResponse = await axios.post(
+          'https://your-booking-api-url/booking',
+          {
+            maPhong: dataJson['maPhong'],
+            ngayDen: dataJson['ngayDen'],
+            ngayDi: dataJson['ngayDi'],
+            soLuongKhach: dataJson['soLuongKhach'],
+            maNguoiDung: dataJson['maNguoiDung'],
+          },
+        );
 
         if (bookingResponse.status === 200) {
           result.return_code = 1;
